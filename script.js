@@ -4,6 +4,18 @@ const editBtn = document.querySelector(".edit-btn");
 const deleteBtn = document.querySelector(".delete-btn");
 let isEdit = false;
 
+const displayItems = () => {
+  if (localStorage.getItem("groceryItems")) {
+    let arr = JSON.parse(localStorage.getItem("groceryItems"));
+
+    arr.forEach((e) => {
+      createItem(e.value);
+    });
+  }
+};
+
+window.addEventListener("DOMContentLoaded", displayItems);
+
 const createItem = (input) => {
   let newItem = document.createElement("div");
   newItem.classList.add("grocery-item");
@@ -42,19 +54,6 @@ const addItem = (event) => {
   }
 };
 
-const displayItems = () => {
-  if (localStorage.getItem("groceryItems")) {
-    let arr = JSON.parse(localStorage.getItem("groceryItems"));
-
-    arr.forEach((e) => {
-      createItem(e.value);
-    });
-  }
-};
-
-input.addEventListener("keyup", addItem);
-window.addEventListener("DOMContentLoaded", displayItems);
-
 const addToLocalStorage = (id, value) => {
   if (localStorage.getItem("groceryItems")) {
     let arr = JSON.parse(localStorage.getItem("groceryItems"));
@@ -67,3 +66,20 @@ const addToLocalStorage = (id, value) => {
     input.value = "";
   }
 };
+
+const editItem = (e) => {
+  isEdit = true;
+  if (e.target.classList.contains("edit-btn")) {
+    let arr = JSON.parse(localStorage.getItem("groceryItems"));
+    for (const item of arr) {
+      if (item.id === e.target.parentElement.parentElement.dataset.id) {
+        input.value = item.value;
+        input.dataset.id = item.id;
+      }
+    }
+  }
+};
+
+const deleteItem = () => {};
+
+input.addEventListener("keyup", addItem);
