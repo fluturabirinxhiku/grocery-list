@@ -5,14 +5,13 @@ h1 {
   text-align: center;
 }
 .container {
-  height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .card {
   margin-top: 10vh;
-  height: 30vh;
-  width: 40vw;
+  width: 30rem;
   border-radius: 0.7rem;
   background-color: #fff;
   display: flex;
@@ -23,4 +22,29 @@ h1 {
 .input {
   margin: 1rem;
   border-radius: 0.5rem;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+.grocery-item {
+  border-top: 0.1rem solid gray;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-left: 0.6rem;
+  margin-right: 0.6rem;
+}
+
+.output {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  font-family: "Source Sans 3";
+  color: rgb(49, 52, 54);
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
