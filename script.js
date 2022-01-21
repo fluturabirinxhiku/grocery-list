@@ -9,7 +9,8 @@ const displayItems = () => {
     let arr = JSON.parse(localStorage.getItem("groceryItems"));
 
     arr.forEach((e) => {
-      createItem(e.value);
+      let item = createItem(e.value);
+      item.dataset.id = e.id;
     });
   }
 };
@@ -63,8 +64,8 @@ const addToLocalStorage = (id, value) => {
     let arr = [];
     arr[0] = { id, value };
     localStorage.setItem("groceryItems", JSON.stringify(arr));
-    input.value = "";
   }
+  input.value = "";
 };
 
 const editItem = (e) => {
@@ -79,7 +80,30 @@ const editItem = (e) => {
     }
   }
 };
+const editLocalStorage = (id, value) => {
+  let arr = JSON.parse(localStorage.getItem("groceryItems"));
+  for (const item of arr) {
+    if (item.id === id) {
+      item.value = value;
+      localStorage.setItem("groceryItems", JSON.stringify(arr));
+    }
+  }
+};
 
-const deleteItem = () => {};
+const deleteItem = (e) => {
+  if (e.target.classList.contains("delete-btn")) {
+    let currentItem = e.target.parentElement.parentElement;
+    deleteFromLocalStorage(currentItem.dataset.id);
+    currentItem.remove();
+  }
+};
+const deleteFromLocalStorage = (id) => {
+  let arr = JSON.parse(localStorage.getItem("groceryItems"));
+  let newArr = arr.filter((item) => {
+    return item.id !== id;
+  });
+
+  localStorage.setItem("groceryItems", JSON.stringify(newArr));
+};
 
 input.addEventListener("keyup", addItem);
