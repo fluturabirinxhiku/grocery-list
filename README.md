@@ -1,3 +1,3 @@
 # Grocery List
 
-A simple Vanilla Javascript app to keep track of grocery list
+A simple Javascript app to keep track of the grocery shopping list
